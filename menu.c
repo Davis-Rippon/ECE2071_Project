@@ -10,12 +10,12 @@ Date Last Edited: April 9 2024
 #include <stdlib.h>
 #include <string.h>
 
-#define insertCase 6953633055386 
-#define removeCase 6953974396019 
-#define searchCase 6954013102811 
-#define printCase 210724587794 
-#define exportCase 6953488276103 
-#define quit 6385632776 
+#define insertCase 6953633055386 // "insert"
+#define removeCase 6953974396019 // "remove"
+#define searchCase 6954013102811 // "search"
+#define printCase 210724587794 // "print"
+#define exportCase 6953488276103 // "export"
+#define quit 6385632776 // "quit"
 
 unsigned long hash(const char *str) {
     unsigned long hash = 5381;  
