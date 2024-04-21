@@ -13,17 +13,30 @@ import plot
 import os
 
 def plot_option():
-    wav_file = input("Enter the path of a .wav file to plot:")
+    options = {
+        "Plot .wav (Raw)" : plotw,
+        "Plot .wav (Filtered)" : plotw,
+        "Go Back" : back
+    }
+    while True:
+        try: 
+            menu.Menu.dict_menu(options)
+
+        except AssertionError as e:
+            break
+
+def plotw(): 
+    wav_file = input("Enter the path of a .wav file to plot: ")
     plot.plot_wav(wav_file)
 
-def exit():
+def back():
     raise AssertionError
 
 
 def main():
     options = {
         "Plot" : plot_option,
-        "Exit" : exit
+        "Exit" : back
     }
     while True:
         try: 
