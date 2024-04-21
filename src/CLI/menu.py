@@ -10,16 +10,16 @@ Date Last Edited: April 21st 2024
 from simple_term_menu import TerminalMenu
 
 class Menu:
-    def list_menu(selections: list) -> None:
+    def list_menu(selections: list) -> None: 
         terminalMenu = TerminalMenu(selections) # Create TerminalMenu Object with the selections
         selection_index = terminalMenu.show() # store the user's selection in "selection_index"
-        selection = selections[selection_index] #
+        selection = selections[selection_index] # select the function they chose
         return selection
 
     def dict_menu(selections: dict) -> None:
-        selection = Menu.list_menu(list(selections.keys())) 
-        selected_function = selections.get(selection) 
-        selected_function() 
+        selection = Menu.list_menu(list(selections.keys())) # Passes a list of keys to list_menu and gets what key the user selects
+        selected_function = selections.get(selection)  # Gets the value of that key, which is a function
+        selected_function() #runs that function
 
 
 

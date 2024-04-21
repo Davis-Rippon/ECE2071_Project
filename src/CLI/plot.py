@@ -14,6 +14,7 @@ import wave
 
 
 def plot_wav(filePath: str):
+
     # open the file using wave 
     file = wave.open(filePath,"r")
 
@@ -25,5 +26,5 @@ def plot_wav(filePath: str):
     plt.figure(1)
     plt.title("Wave data")
     plt.plot(signal)
-    plt.savefig('plot.png')
+    plt.savefig('outputs/plot.png')
 
