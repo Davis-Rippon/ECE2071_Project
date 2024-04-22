@@ -38,7 +38,7 @@ def plot_wav(filePaths: list[str]):
         #Plot
         plt.plot(signal)
 
-    usrFileName = input("\nWhat would you like to name the graph? (.png)\n")
+    usrFileName = input("\nWhat would you like to name the plot? (.png)\n")
 
     plt.savefig('outputs/' + usrFileName + '.png')
 

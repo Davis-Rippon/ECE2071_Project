@@ -1,5 +1,5 @@
 """
-Recording related functions, intended to control the state of the serial handler (and consequently, the embedded system)
+Recording related functions/class, intended to control the state of the serial handler (and consequently, the embedded system)
 
 Author: Davis Rippon
 Version: 1.0
@@ -22,13 +22,14 @@ class RecordingData:
         self.audioDuration = 120
         self.acceptableRange = 10
         self.ultrasonicState = True
-        self.strUs = "On"
+
+
 
     def print(self):
         print(f"Sampling Rate: {self.samplingRate}\n" +
         f"Audio Duration: {self.audioDuration}\n" + 
         f"Acceptable Range: {self.acceptableRange}\n"
-        f"Ultrasonic Sensor: {self.ultrasonicState} \n")
+        f"Ultrasonic Sensor: {'On' if self.ultrasonicState else 'Off'} \n")
 
     def set_sampling_rate(self):
         self.samplingRate = input("New Sampling Rate: ")
@@ -46,7 +47,7 @@ class RecordingData:
         self.__init__()
 
 
-# Create recording data object
+# Create recording data object upon IMPORTING this file to main.py
 
 global recordingData
 
