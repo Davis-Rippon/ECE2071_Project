@@ -20,25 +20,10 @@ import recording
 
 def plot_option():
     print("Select files to plot (SPACEBAR to select, ENTER to confirm) \n")
-    files = menu.Menu.list_file_names("./data")
+    files = menu.Menu.list_datafile_names("./data")
     indexes = menu.Menu.multi_select(files)
 
     plot.plot_wav([files[i] for i in indexes])
-
-
-    """
-    options = {
-        "Plot .wav (Raw)" : plotw,
-        "Plot .wav (Filtered)" : plotw,
-        "Go Back" : back
-    }
-    while True:
-        try: 
-            menu.Menu.dict_menu(options)
-
-        except AssertionError as e:
-            break
-    """
 
 def record_option():
     recording.main()
