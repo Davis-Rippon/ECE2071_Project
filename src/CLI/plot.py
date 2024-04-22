@@ -17,18 +17,28 @@ import numpy as np
 import wave
 
 
-def plot_wav(filePath: str):
+def plot_wav(filePaths: list[str]):
+    """
+    plots multiple .wavs in one figure.
+    """
 
-    # open the file using wave 
-    file = wave.open(filePath,"r")
-
-    # Read the wav as 16 bit integers
-    raw = file.readframes(-1)
-    signal = np.frombuffer(raw,"int16")
-    
-    #Plot
     plt.figure(1)
     plt.title("Wave data")
-    plt.plot(signal)
-    plt.savefig('outputs/plot.png')
+
+
+    for filePath in filePaths:
+        print(filePath)
+        # open the file using wave 
+        file = wave.open(filePath,"r")
+
+        # Read the wav as 16 bit integers
+        raw = file.readframes(-1)
+        signal = np.frombuffer(raw,"int16")
+        
+        #Plot
+        plt.plot(signal)
+
+    usrFileName = input("\nWhat would you like to name the graph? (.png)\n")
+
+    plt.savefig('outputs/' + usrFileName + '.png')
 
