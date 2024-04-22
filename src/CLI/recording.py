@@ -63,13 +63,13 @@ def settings() -> None:
         "Back" : back
     }
     while True:
-        clear()
+        menu.clear()
         recordingData.print()
         try: 
             menu.Menu.dict_menu(options, recordingData)
 
         except:
-            clear()
+            menu.clear()
             break
 
 def start():
@@ -80,7 +80,7 @@ def back():
     raise AssertionError
 
 def main():
-    clear()
+    menu.clear()
     options = {
         "Start Recording" : start,
         "Recording Settings" : settings,
