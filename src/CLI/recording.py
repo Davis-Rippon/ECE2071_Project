@@ -25,15 +25,18 @@ class RecordingData:
         self.audioDuration = 120
         self.acceptableRange = 10
         self.ultrasonicState = True
+        self.waitForUS = False
 
     def print(self):
         """
         Print the current settings
         """
-        print(f"Sampling Rate: {self.samplingRate}\n" +
-        f"Max Audio Duration: {self.audioDuration}\n" + 
-        f"Acceptable Range: {self.acceptableRange}\n"
-        f"Ultrasonic Sensor: {'On' if self.ultrasonicState else 'Off'} \n")
+        print(f"Sampling Rate: {self.samplingRate} Hz\n" +
+        f"Max Audio Duration: {self.audioDuration} seconds\n" + 
+        f"Acceptable Range: {self.acceptableRange} cm\n" +
+        f"Ultrasonic Sensor: {'On' if self.ultrasonicState else 'Off'} \n" +
+        f"Wait for US to begin recording: {'Yes' if self.waitForUS else 'No'} \n")
+
 
     def set_sampling_rate(self):
         """
@@ -59,6 +62,9 @@ class RecordingData:
         """
         self.ultrasonicState = not self.ultrasonicState
 
+    def toggle_wait_for_US(self):
+        self.waitForUS = not self.waitForUS
+
     def reset(self):
         """
         Reset to default values
@@ -79,6 +85,7 @@ def settings() -> None:
         "Adjust Audio Duration" : RecordingData.set_audio_duration,
         "Adjust Ultrasonic Range" : RecordingData.set_acceptable_range,
         "Toggle Ultrasonic Sensor" : RecordingData.toggle_US,
+        "Toggle Wait for US Sensor" : RecordingData.toggle_wait_for_US,
         "Reset to defaults" : RecordingData.reset,
         "Back" : back
     }
@@ -95,7 +102,7 @@ def settings() -> None:
 
 def start():
     menu.clear()
-    serial_handler.start_recording(recordingData.samplingRate, recordingData.audioDuration, recordingData.acceptableRange, recordingData.ultrasonicState)
+    serial_handler.start_recording(recordingData.samplingRate, recordingData.audioDuration, recordingData.acceptableRange, recordingData.ultrasonicState, recordingData.waitForUS)
     
 
 def back():
