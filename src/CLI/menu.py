@@ -22,6 +22,12 @@ class Menu:
     """
     Displays a list of strings as an interactible menu and returns the string of the user's selection 
     """
+    def multi_select(selections: list) -> None:
+        terminalMenu = TerminalMenu(selections,multi_select=True) # Create TerminalMenu Object with the selections
+        selection_indexes = list(terminalMenu.show()) # store the user's selection in "selection_index"
+        return selection_indexes
+        
+
     def list_menu(selections: list) -> None: 
         terminalMenu = TerminalMenu(selections) # Create TerminalMenu Object with the selections
         selection_index = terminalMenu.show() # store the user's selection in "selection_index"
@@ -40,36 +46,12 @@ class Menu:
             return
         selected_function() #runs that function
 
+    def list_file_names(directory="."):
+        return [('data/' + file) for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))]
+
+
 def clear():
     """
     Clears the terminal on windows, linux and mac
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-
-
-"""
-# example usage of this menu system, uncomment and run menu.py to see how it works. To be removed.
-
-def start():
-    print("start")
-
-def create_recording():
-    print("create recording")
-
-def view_status(): 
-    print("view_status")
-
-def quit(): 
-    print("quit")
-
-def main():
-    options = {
-      "Start": start,
-      "Create Recording": create_recording,
-      "View Status": view_status,
-      "Quit": quit
-      }
-    Menu.dict_menu(options)
-
-main()
-"""

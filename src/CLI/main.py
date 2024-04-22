@@ -19,6 +19,14 @@ import recording
 
 
 def plot_option():
+    print("Select files to plot (SPACEBAR to select, ENTER to confirm) \n")
+    files = menu.Menu.list_file_names("./data")
+    indexes = menu.Menu.multi_select(files)
+
+    plot.plot_wav([files[i] for i in indexes])
+
+
+    """
     options = {
         "Plot .wav (Raw)" : plotw,
         "Plot .wav (Filtered)" : plotw,
@@ -30,12 +38,14 @@ def plot_option():
 
         except AssertionError as e:
             break
+    """
 
 def record_option():
     recording.main()
 
-def plotw(): 
-    wav_file = input("Enter the path of a .wav file to plot: ")
+def plotw(wav_file): 
+    #wav_file = input("Enter the path of a .wav file to plot: ")
+    wav_file = "data/" + wav_file
     plot.plot_wav(wav_file)
     print("Successfully Plotted.")
 
