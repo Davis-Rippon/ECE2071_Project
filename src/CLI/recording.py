@@ -18,38 +18,57 @@ class RecordingData:
     """
 
     def __init__(self):
+        """
+        Set the default values for recording
+        """
         self.samplingRate = 6000
         self.audioDuration = 120
         self.acceptableRange = 10
         self.ultrasonicState = True
 
-
-
     def print(self):
+        """
+        Print the current settings
+        """
         print(f"Sampling Rate: {self.samplingRate}\n" +
-        f"Audio Duration: {self.audioDuration}\n" + 
+        f"Max Audio Duration: {self.audioDuration}\n" + 
         f"Acceptable Range: {self.acceptableRange}\n"
         f"Ultrasonic Sensor: {'On' if self.ultrasonicState else 'Off'} \n")
 
     def set_sampling_rate(self):
+        """
+        Prompt the user for a new sampling rate
+        """
         self.samplingRate = input("New Sampling Rate: ")
 
     def set_audio_duration(self):
+        """
+        Prompt the user for a new audio duration
+        """
         self.audioDuration = input("New Audio Duration: ")
 
     def set_acceptable_range(self):
+        """
+        Prompt the user for a new US sensor range
+        """
         self.acceptableRange = input("New Sensor Range: ")
 
     def toggle_US(self):
+        """
+        toggle whether to use the ultrasonic sensor
+        """
         self.ultrasonicState = not self.ultrasonicState
 
     def reset(self):
-        self.__init__()
+        """
+        Reset to default values
+        """
+        self.__init__() # Calling the constructor will reset all the values back to default
 
-
-# Create recording data object upon IMPORTING this file to main.py
-
-global recordingData
+"""`
+This RecordingData object gets created when we IMPORT it to main (before we invoke main())
+Because of this this, all of the recording attributes stay the same, regardless of what's happening in the program
+"""
 
 recordingData = RecordingData()
 
