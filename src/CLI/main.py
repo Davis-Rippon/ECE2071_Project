@@ -6,11 +6,17 @@ Main code for CLI.
 Author: Davis Rippon
 Version: 1.0
 Date Last Edited: April 21st 2024
+
+Dependencies:
+-simple-term-menu
+- matplotlib
+- numpy
 """
 
-import menu 
+import menu
 import plot
-import os
+import recording
+
 
 def plot_option():
     options = {
@@ -25,20 +31,25 @@ def plot_option():
         except AssertionError as e:
             break
 
+def record_option():
+    recording.main()
+
 def plotw(): 
     wav_file = input("Enter the path of a .wav file to plot: ")
     plot.plot_wav(wav_file)
+    print("Successfully Plotted.")
 
 def back():
     raise AssertionError
 
-
 def main():
     options = {
         "Plot" : plot_option,
+        "Record" : record_option,
         "Exit" : back
     }
     while True:
+        menu.clear()
         try: 
             menu.Menu.dict_menu(options)
 
