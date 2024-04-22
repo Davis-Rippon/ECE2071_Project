@@ -23,7 +23,7 @@ def plot_wav(filePaths: list[str]):
     """
 
     plt.figure(1)
-    plt.title("Wave data")
+    plt.title("Wave Data Plot")
 
 
     for filePath in filePaths:
@@ -36,9 +36,12 @@ def plot_wav(filePaths: list[str]):
         signal = np.frombuffer(raw,"int16")
         
         #Plot
-        plt.plot(signal)
+        plt.plot(signal,label=filePath)
+        
+    plt.legend(loc="upper left")
 
     usrFileName = input("\nWhat would you like to name the plot? (.png)\n")
 
     plt.savefig('outputs/' + usrFileName + '.png')
+    plt.close()
 
