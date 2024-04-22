@@ -45,8 +45,6 @@ class RecordingData:
     def reset(self):
         self.__init__()
 
-def clear():
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Create recording data object
 
