@@ -19,16 +19,19 @@ Menu Class.
 Uses simple-term-menu to create real-time interactible menus. 
 """
 class Menu:
-    """
-    Displays a list of strings as an interactible menu and returns the string of the user's selection 
-    """
     def multi_select(selections: list) -> None:
-        terminalMenu = TerminalMenu(selections,multi_select=True) # Create TerminalMenu Object with the selections
+        """
+        Displays a list of strings as an interactible, multi-choice menu and returns the indexes of the user's selections in a list
+        """
+        terminalMenu = TerminalMenu(selections,multi_select=True,multi_select_select_on_accept=False) # Create TerminalMenu Object with the selections
         selection_indexes = list(terminalMenu.show()) # store the user's selection in "selection_index"
         return selection_indexes
         
 
     def list_menu(selections: list) -> None: 
+        """
+        Displays a list of strings as an interactible menu and returns the string of the user's selection 
+        """
         terminalMenu = TerminalMenu(selections) # Create TerminalMenu Object with the selections
         selection_index = terminalMenu.show() # store the user's selection in "selection_index"
         selection = selections[selection_index] # select the key they chose
@@ -46,8 +49,11 @@ class Menu:
             return
         selected_function() #runs that function
 
-    def list_file_names(directory="."):
-        return [('data/' + file) for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))]
+    def list_datafile_names(directory="./data"):
+        """
+        Returns a list of the files in a diretory. By default, this is the /data directory
+        """
+        return [file for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))]
 
 
 def clear():

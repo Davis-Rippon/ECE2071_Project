@@ -40,8 +40,9 @@ def plot_wav(filePaths: list[str]):
         
     plt.legend(loc="upper left")
 
-    usrFileName = input("\nWhat would you like to name the plot? (.png)\n")
+    usrFileName = input("\nWhat would you like to name the plot?\n")
 
     plt.savefig('outputs/' + usrFileName + '.png')
+    input(f"\nSuccessfully saved at {'outputs/' + usrFileName + '.png'}. Press ENTER to go back to main menu. ")
     plt.close()
 

@@ -3,5 +3,5 @@ def start_recording(samplingRate: int, audioDuration: int, acceptableRange: int,
         f"Sampling Rate: {samplingRate}\n" +
         f"Audio Duration: {audioDuration}\n" + 
         f"Acceptable Range: {acceptableRange}\n"
-        f"Ultrasonic Sensor: {ultrasonicState} \n" + 
+        f"Ultrasonic Sensor: {ultrasonicState} \n\n" + 
         "Your audio has been saved to outputs as a .wav (Test). \n")

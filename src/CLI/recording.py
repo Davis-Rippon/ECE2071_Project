@@ -84,6 +84,7 @@ def settings() -> None:
     }
     while True:
         menu.clear()
+        print("Recording Settings\n")
         recordingData.print()
         try: 
             menu.Menu.dict_menu(options, recordingData)
@@ -93,6 +94,7 @@ def settings() -> None:
             break
 
 def start():
+    menu.clear()
     serial_handler.start_recording(recordingData.samplingRate, recordingData.audioDuration, recordingData.acceptableRange, recordingData.ultrasonicState)
     
 
@@ -108,6 +110,7 @@ def main():
     }
     while True:
         try: 
+            print("Recording Options")
             menu.Menu.dict_menu(options)
 
         except AssertionError as e:
