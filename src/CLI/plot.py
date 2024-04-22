@@ -6,6 +6,10 @@ TODO: Add function for plotting .csv
 Author: Davis Rippon
 Version: 1.0
 Date Last Edited: April 21st 2024
+
+Dependencies: 
+- matplotlib
+- numpy
 """
 
 import matplotlib.pyplot as plt
