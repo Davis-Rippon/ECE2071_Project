@@ -37,11 +37,12 @@ class Menu:
         selection = selections[selection_index] # select the key they chose
         return selection
 
-    """.
-    This method takes a dictionary that maps keys to functions, uses TerminalMenu 
-    to get a user's selected key, then runs the function associated with that key
-    """
+
     def dict_menu(selections: dict, arg=None) -> None:
+        """.
+        This method takes a dictionary that maps keys to functions, uses TerminalMenu 
+        to get a user's selected key, then runs the function associated with that key
+        """
         selection = Menu.list_menu(list(selections.keys())) # Passes a list of keys to list_menu and gets what key the user selects
         selected_function = selections.get(selection)  # Gets the value of that key, which is a function
         if arg is not None:
