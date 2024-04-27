@@ -50,9 +50,9 @@ class Menu:
             return
         selected_function() #runs that function
 
-    def list_datafile_names(directory="./data"):
+    def list_datafile_names(directory="./data/wav"):
         """
-        Returns a list of the files in a diretory. By default, this is the /data directory
+        Returns a list of the files in a diretory. By default, this is the /data/wav directory
         """
         return [file for file in os.listdir(directory) if os.path.isfile(os.path.join(directory, file))]
 

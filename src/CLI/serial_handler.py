@@ -4,16 +4,46 @@ import time
 
 def start_recording(samplingRate: int, audioDuration: int, acceptableRange: int, ultrasonicState: bool, waitForUS: bool = False):
     portList = serial_ports.comports()
+
+    STMPort = None
     
     for port in portList:
         if "STM" in str(port):
-            print(str(port))
             STMPort = str(port.device)
-            input()
+            print("STM32 Found at port '" + str(port) + "'\n")
 
-    if STMPort == None:
-        input("STM32 Not found! Check Connection.\n\nPress ENTER to return to main menu")
+    if STMPort is None:
+        input("STM32 Not found! Check Connection.\n\nPress ENTER to return to recording menu")
         raise AssertionError
+
+    serialPort = serial.Serial(STMPort, 115200)
+
+    if not serialPort.is_open:
+        input("Port failed to open! \n\nPress ENTER to return to recording menu")
+
+    while True:
+        try:
+            print("0")
+            if serialPort.in_waiting >= 1:
+                data = serialPort.read(1)
+                print(data)
+
+                if data == b'S':
+                    print("2")
+                    byteValue = serialPort.read(4)
+                    integerValue = int.from_bytes(byteValue, byteorder="little", signed=False)
+
+                    print("Recieved Data: " + integerValue)
+
+        except KeyboardInterrupt as e:
+            print("Exiting and closing ports")
+            break
+    
+    serialPort.close()
+
+    
+
+
 
 
     print("started recording with: \n" +
