@@ -21,19 +21,41 @@ Uses simple-term-menu to create real-time interactible menus.
 class Menu:
     def multi_select(selections: list) -> None:
         """
-        Displays a list of strings as an interactible, multi-choice menu and returns the indexes of the user's selections in a list
+        Displays Selection of numbered options and takes multiple user inputs 
         """
-        terminalMenu = TerminalMenu(selections,multi_select=True,multi_select_select_on_accept=False) # Create TerminalMenu Object with the selections
-        selection_indexes = list(terminalMenu.show()) # store the user's selection in "selection_index"
-        return selection_indexes
+        selectedIndexes = []
+
+        while True:
+            clear()
+            print("Select files to plot \n")
+
+            for index, selectionOption in enumerate(selections):
+                print(f"{index+1}. ({'*' if index in selectedIndexes else ' '}) {selectionOption}")
+            
+            indexSelection = input("\nSelect an option (Multi-Select), or press ENTER to confirm: ")
+
+            if indexSelection == "":
+                break
+
+            try: 
+                indexSelection = int(indexSelection) - 1
+                assert indexSelection >= 0 and indexSelection < len(selections)
+                selectedIndexes.append(indexSelection)
+            except:
+                continue
+
+        return selectedIndexes
         
 
     def list_menu(selections: list) -> None: 
         """
-        Displays a list of strings as an interactible menu and returns the string of the user's selection 
+        
         """
-        terminalMenu = TerminalMenu(selections) # Create TerminalMenu Object with the selections
-        selection_index = terminalMenu.show() # store the user's selection in "selection_index"
+        for index, selectionOption in enumerate(selections):
+            print(f"{index+1}. {selectionOption}")
+        
+        selection_index = int(input(f"Select an option (1-{len(selections)}): ")) - 1 
+
         selection = selections[selection_index] # select the key they chose
         return selection
 

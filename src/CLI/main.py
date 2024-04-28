@@ -20,12 +20,13 @@ import recording
 
 def plot_option():
     menu.clear()
-    print("Select files to plot (SPACEBAR to select, ENTER to confirm) \n")
 
     files = menu.Menu.list_datafile_names("./data/wav")
     indexes = menu.Menu.multi_select(files)
 
-    plot.plot_wav([('data/wav/' + files[i]) for i in indexes]) # list of all file names with 'data/' at the beginning 
+    menu.clear()
+
+    plot.plot_wav([('data/wav/' + files[i]) for i in indexes]) # list of all file names with 'data/wav/' at the beginning 
 
 def record_option():
     recording.main()
