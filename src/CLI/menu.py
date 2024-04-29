@@ -23,28 +23,36 @@ class Menu:
         """
         Displays Selection of numbered options and takes multiple user inputs 
         """
-        selectedIndexes = []
+        selectedIndexes = set() # Represents the selections the user currently has. A set cannot have duplicates, just like a 
+                                # user selection cannot have duplicates
 
         while True:
             clear()
             print("Select files to plot \n")
 
-            for index, selectionOption in enumerate(selections):
+            for index, selectionOption in enumerate(selections): # Print the options to select
                 print(f"{index+1}. ({'*' if index in selectedIndexes else ' '}) {selectionOption}")
             
             indexSelection = input("\nSelect an option (Multi-Select), or press ENTER to confirm: ")
 
-            if indexSelection == "":
+            if indexSelection == "": # I
                 break
 
             try: 
                 indexSelection = int(indexSelection) - 1
                 assert indexSelection >= 0 and indexSelection < len(selections)
-                selectedIndexes.append(indexSelection)
+                
+                if indexSelection in selectedIndexes:
+                    selectedIndexes.remove(indexSelection) #Remove if the user has already selected the index
+                else:
+                    selectedIndexes.add(indexSelection) # add if it's not already selected
             except:
                 continue
 
-        return selectedIndexes
+        if len(selectedIndexes) == 0:
+            raise AssertionError
+
+        return [indexes for indexes in selectedIndexes]
         
 
     def list_menu(selections: list) -> None: 

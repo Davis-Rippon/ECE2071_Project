@@ -22,11 +22,16 @@ def plot_option():
     menu.clear()
 
     files = menu.Menu.list_datafile_names("./data/wav")
-    indexes = menu.Menu.multi_select(files)
+    
+    try: # If no selections were made, an error is thrown
+        indexes = menu.Menu.multi_select(files) 
+        menu.clear()
+        plot.plot_wav([('data/wav/' + files[i]) for i in indexes]) # list of all file names with 'data/wav/' at the beginning 
 
-    menu.clear()
+    except: 
+        input("No .wav selected. Press ENTER to return back to main menu. ")
 
-    plot.plot_wav([('data/wav/' + files[i]) for i in indexes]) # list of all file names with 'data/wav/' at the beginning 
+
 
 def record_option():
     recording.main()
