@@ -24,8 +24,6 @@ class RecordingData:
         self.samplingRate = 6000
         self.audioDuration = 120
         self.acceptableRange = 10
-        self.ultrasonicState = True
-        self.waitForUS = False
 
     def print(self):
         """
@@ -33,9 +31,7 @@ class RecordingData:
         """
         print(f"Sampling Rate: {self.samplingRate} Hz\n" +
         f"Max Audio Duration: {self.audioDuration} seconds\n" + 
-        f"Acceptable Range: {self.acceptableRange} cm\n" +
-        f"Ultrasonic Sensor: {'On' if self.ultrasonicState else 'Off'} \n" +
-        f"Wait for US to begin recording: {'Yes' if self.waitForUS else 'No'} \n")
+        f"Acceptable Range: <{self.acceptableRange} cm\n" )
 
 
     def set_sampling_rate(self):
@@ -56,14 +52,7 @@ class RecordingData:
         """
         self.acceptableRange = input("New Sensor Range: ")
 
-    def toggle_US(self):
-        """
-        toggle whether to use the ultrasonic sensor
-        """
-        self.ultrasonicState = not self.ultrasonicState
 
-    def toggle_wait_for_US(self):
-        self.waitForUS = not self.waitForUS
 
     def reset(self):
         """
@@ -84,8 +73,6 @@ def settings() -> None:
         "Adjust Sampling Rate" : RecordingData.set_sampling_rate,
         "Adjust Audio Duration" : RecordingData.set_audio_duration,
         "Adjust Ultrasonic Range" : RecordingData.set_acceptable_range,
-        "Toggle Ultrasonic Sensor" : RecordingData.toggle_US,
-        "Toggle Wait for US Sensor" : RecordingData.toggle_wait_for_US,
         "Reset to defaults" : RecordingData.reset,
         "Back" : back
     }
@@ -100,13 +87,21 @@ def settings() -> None:
             menu.clear()
             break
 
+
+
 def start():
     menu.clear()
-    serial_handler.start_recording(recordingData.samplingRate, recordingData.audioDuration, recordingData.acceptableRange, recordingData.ultrasonicState, recordingData.waitForUS)
-    
+    options = {
+        "Stop/Start Mode" : serial_handler.ss_recording,
+        "Ultrasonic Mode" : serial_handler.us_recording,
+    }
 
-def back():
-    raise AssertionError
+    while True:
+        try:
+            print("Recording Mode")
+            menu.Menu.dict_menu(options)
+        except AssertionError as e:
+            break
 
 def main():
     menu.clear()
@@ -123,3 +118,5 @@ def main():
         except AssertionError as e:
             break
 
+def back():
+    raise AssertionError

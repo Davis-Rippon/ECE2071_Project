@@ -6,7 +6,7 @@ Version: 1.0
 Date Last Edited: April 21st 2024
 
 Dependencies: 
-- simple-term-menu
+None
 """
 
 
@@ -16,7 +16,7 @@ import os
 """
 Menu Class.
 
-Uses simple-term-menu to create real-time interactible menus. 
+Creates real-time, interactible menus in command prompt 
 """
 class Menu:
     def multi_select(selections: list) -> None:
@@ -57,15 +57,20 @@ class Menu:
 
     def list_menu(selections: list) -> None: 
         """
-        
+        Prints a list of selections and lets the user make a selection from them.
         """
-        for index, selectionOption in enumerate(selections):
-            print(f"{index+1}. {selectionOption}")
-        
-        selection_index = int(input(f"Select an option (1-{len(selections)}): ")) - 1 
+        while True:
+            for index, selectionOption in enumerate(selections):
+                print(f"{index+1}. {selectionOption}")
+            
+            try: # An invalid choice will throw an error
+                selection_index = int(input(f"Select an option (1-{len(selections)}): ")) - 1 
+                selection = selections[selection_index] # select the key they chose
+            except: # If invalid choice, clear and try again
+                clear()
+                continue
 
-        selection = selections[selection_index] # select the key they chose
-        return selection
+            return selection #if valid choice, return 
 
 
     def dict_menu(selections: dict, arg=None) -> None:
