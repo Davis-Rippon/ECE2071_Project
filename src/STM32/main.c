@@ -2,7 +2,11 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : Main program body for ECE2071 Project 1.
+  * 				  This system records audio data from ADC and sends to CLI
+  * 				  over UART along with US sensor data
+  * @author 		: Kody Appleton
+  * @data			: 05/05/2024
   ******************************************************************************
   * @attention
   *
