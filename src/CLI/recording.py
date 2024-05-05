@@ -124,10 +124,14 @@ def settings() -> None:
 def start():
     serial_handler.start_recording(recordingData.samplingRate,recordingData.audioDuration, recordingData.acceptableRange, recordingData.ultrasonicState)
 
+def start_us():
+    serial_handler.start_recording_us(recordingData.samplingRate,recordingData.audioDuration, recordingData.acceptableRange)
+
 def main():
     menu.clear()
     options = {
         "Start Recording" : start,
+        "Start Recording with Ultrasonic Sensor" : start_us,
         "Recording Settings" : settings,
         "Back" : back
     }
