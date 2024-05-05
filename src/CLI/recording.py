@@ -122,7 +122,7 @@ def settings() -> None:
 
 
 def start():
-    serial_handler.start_recording(recordingData.samplingRate,recordingData.audioDuration, recordingData.ultrasonicState, recordingData.ultrasonicState)
+    serial_handler.start_recording(recordingData.samplingRate,recordingData.audioDuration, recordingData.acceptableRange, recordingData.ultrasonicState)
 
 def main():
     menu.clear()

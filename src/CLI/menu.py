@@ -3,14 +3,12 @@ This file contains the logic that is used to handle all multiple choice prompts 
 
 Author: Davis Rippon
 Version: 1.0
-Date Last Edited: April 21st 2024
+Date Last Edited: May 5th 2024
 
 Dependencies: 
 None
 """
 
-
-from simple_term_menu import TerminalMenu
 import os
 
 """
@@ -30,7 +28,7 @@ class Menu:
             clear()
             print("Select files to plot \n")
 
-            for index, selectionOption in enumerate(selections): # Print the options to select
+            for index, selectionOption in enumerate(selections): # Print the options to select in form "1. <option>, 2. <option2>, etc"
                 print(f"{index+1}. ({'*' if index in selectedIndexes else ' '}) {selectionOption}")
             
             indexSelection = input("\nSelect an option (Multi-Select), or press ENTER to confirm: ")
