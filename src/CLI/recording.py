@@ -24,6 +24,7 @@ class RecordingData:
         self.samplingRate = 6000
         self.audioDuration = 120
         self.acceptableRange = 10
+        self.ultrasonicState = True
 
     def print(self):
         """
@@ -31,27 +32,57 @@ class RecordingData:
         """
         print(f"Sampling Rate: {self.samplingRate} Hz\n" +
         f"Max Audio Duration: {self.audioDuration} seconds\n" + 
-        f"Acceptable Range: <{self.acceptableRange} cm\n" )
+        f"Acceptable Range: <{self.acceptableRange} cm\n" +
+        f"Ultrasonic Sensor: {'On' if self.ultrasonicState else 'Off'}\n")
 
 
     def set_sampling_rate(self):
         """
         Prompt the user for a new sampling rate
         """
-        self.samplingRate = input("New Sampling Rate: ")
+        while True:
+
+            try:
+                self.samplingRate = int(input("New Sampling Rate (0-6000 Hz): "))
+                if self.samplingRate > 6000 or self.samplingRate < 0:
+                    raise AssertionError
+                break
+            except:
+                pass
 
     def set_audio_duration(self):
         """
         Prompt the user for a new audio duration
         """
-        self.audioDuration = input("New Audio Duration: ")
+        while True:
+
+            try:
+                self.audioDuration = int(input("New audio duration (Non-Negative): "))
+                if self.audioDuration < 0:
+                    raise AssertionError
+                break
+            except:
+                pass
 
     def set_acceptable_range(self):
         """
         Prompt the user for a new US sensor range
         """
-        self.acceptableRange = input("New Sensor Range: ")
+        while True:
 
+            try:
+                self.acceptableRange = int(input("New Ultrasonic Sensor range (0-100cm): "))
+                if self.acceptableRange < 0 or self.acceptableRange > 100:
+                    raise AssertionError
+                break
+            except:
+                pass
+
+    def toggle_ultrasonicState(self):
+        """
+        Toggle ultrasonic sensor
+        """
+        self.ultrasonicState = not self.ultrasonicState
 
 
     def reset(self):
@@ -73,6 +104,7 @@ def settings() -> None:
         "Adjust Sampling Rate" : RecordingData.set_sampling_rate,
         "Adjust Audio Duration" : RecordingData.set_audio_duration,
         "Adjust Ultrasonic Range" : RecordingData.set_acceptable_range,
+        "Toggle Ultrasonic Sensor" : RecordingData.toggle_ultrasonicState,
         "Reset to defaults" : RecordingData.reset,
         "Back" : back
     }
@@ -90,18 +122,7 @@ def settings() -> None:
 
 
 def start():
-    menu.clear()
-    options = {
-        "Stop/Start Mode" : serial_handler.ss_recording,
-        "Ultrasonic Mode" : serial_handler.us_recording,
-    }
-
-    while True:
-        try:
-            print("Recording Mode")
-            menu.Menu.dict_menu(options)
-        except AssertionError as e:
-            break
+    serial_handler.start_recording(recordingData.samplingRate,recordingData.audioDuration, recordingData.ultrasonicState, recordingData.ultrasonicState)
 
 def main():
     menu.clear()
