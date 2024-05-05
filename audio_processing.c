@@ -1,34 +1,17 @@
-/*
-This file works to process the .DATA file.
-Creates a .CSV file from US data.
-Creates a .WAV file from ADC data.
-Creates a 2nd .WAV from ADC data subjected to a moving average filter function.
-
-Author: John Curran
-Version: 2.0
-Date Last Edited: May 5th 2024
-
-Dependencies: 
-- stdio.h
-- stdlib.h
-- stdint.h
-- string.h
-*/
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 
 
-#define SAMPLE_RATE 6000
 // Number of values being pushed into moving average filter each time
 #define SAMPLE_LENGTH 10
 #define US_MIN_VALUE 9999
 #define US_MAX_VALUE 30000
 #define ADC_MIN_VALUE 0
 #define ADC_MAX_VALUE 4095
+
+int SAMPLE_RATE = 6000;
 
 
 typedef struct {
@@ -52,12 +35,22 @@ void write_wav_header(const char* filename, int16_t* data, int numSamples, int i
 void moving_average(int16_t* data, int dataSize, int16_t* result);
 
 
-int main() {
-    FILE* inputFile = fopen("data/test.data", "r");
+
+int main(int argc, char *args[]) {
+
+    if (argc != 3) {
+        printf("Incorrect number of arguments provided. Two arguments expected.");
+        return 1;
+    }
+
+    FILE* inputFile = fopen(args[1],"r");
+
     if (!inputFile) {
         perror("DATA FILE ERROR");
         return -1;
     }
+
+    SAMPLE_RATE = atoi(args[2]);
 
     FILE* usOutputFile = fopen("us_data.csv", "w");
     if (!usOutputFile) {
