@@ -1,3 +1,13 @@
+"""
+Serial handler for CLI
+
+Author: Davis Rippon
+Date Last Edited: 5th May 2024
+
+Dependencies:
+None
+"""
+
 import serial.tools.list_ports as serial_ports
 import serial
 import menu
