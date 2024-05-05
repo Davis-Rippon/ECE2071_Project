@@ -1,3 +1,21 @@
+/*
+This file works to process the .DATA file.
+Creates a .CSV file from US data.
+Creates a .WAV file from ADC data.
+Creates a 2nd .WAV from ADC data subjected to a moving average filter function.
+
+Author: John Curran
+Version: 2.0
+Date Last Edited: May 5th 2024
+
+Dependencies: 
+- stdio.h
+- stdlib.h
+- stdint.h
+- string.h
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
